@@ -19,6 +19,7 @@
 如果我们不想看到错误输出呢？我们可以禁止标准错误:   cat $badname 2>/dev/null
 我们可以通过下面这个测试来更加深刻的理解/dev/null ：
 ```shell
+<<<<<<< HEAD
 <span style="font-size:18px">$cat test.txt   
 just for test  
 $cat test.txt >/dev/null   
@@ -30,6 +31,17 @@ cat: test2.txt: 没有那个文件或目录
 $cat test2.txt 2>/dev/null   
 $  
 </span>  
+=======
+  $cat test.txt   
+  just for test  
+  $cat test.txt >/dev/null   
+  $cat test.txt 1>/dev/null   
+  $cat test2.txt   
+  cat: test2.txt: 没有那个文件或目录  
+  $cat test2.txt >/dev/null   
+  cat: test2.txt: 没有那个文件或目录  
+  $cat test2.txt 2>/dev/null   
+>>>>>>> e9a91d381fafe7792015210182167b109754676e
 ```
 
 - /dev/zero 的日常使用
@@ -41,6 +53,7 @@ $
 > 脚本实例 1. 用/dev/zero创建一个交换临时文件  
 
 ```shell
+<<<<<<< HEAD
 <span style="font-size:18px">#!/bin/bash  
 
 # 创建一个交换文件，参数为创建的块数量（不带参数则为默认），一块为1024B（1K）  
@@ -109,6 +122,75 @@ Creating swap file of size 40 blocks (KB).
 无标签， UUID=3e59eddf-098f-454d-9507-aba55f434a8c  
 Swap file created and activated.  
 </span>  
+=======
+  #!/bin/bash  
+
+  # 创建一个交换文件，参数为创建的块数量（不带参数则为默认），一块为1024B（1K）  
+
+  ROOT_UID=0         # Root 用户的 $UID 是 0.  
+  E_WRONG_USER=65    # 不是 root?  
+
+  FILE=/swap  
+  BLOCKSIZE=1024  
+  MINBLOCKS=40  
+  SUCCESS=0  
+
+  # 这个脚本必须用root来运行,如果不是root作出提示并退出  
+  if [ "$UID" -ne "$ROOT_UID" ]  
+  then  
+    echo; echo "You must be root to run this script."; echo  
+    exit $E_WRONG_USER  
+  fi   
+
+
+  blocks=${1:-$MINBLOCKS}          # 如果命令行没有指定，则设置为默认的40块.  
+  # 上面这句等同如：  
+  # --------------------------------------------------  
+  # if [ -n "$1" ]  
+  # then  
+  #   blocks=$1  
+  # else  
+  #   blocks=$MINBLOCKS  
+  # fi  
+  # --------------------------------------------------  
+
+  if [ "$blocks" -lt $MINBLOCKS ]  
+  then  
+    blocks=$MINBLOCKS              # 最少要有 40 个块长，如果带入参数比40小，将块数仍设置成40  
+  fi   
+
+  echo "Creating swap file of size $blocks blocks (KB)."  
+  dd if=/dev/zero of=$FILE bs=$BLOCKSIZE count=$blocks # 把零写入文件.  
+
+  mkswap $FILE $blocks             # 将此文件建为交换文件（或称交换分区）.  
+  swapon $FILE                     # 激活交换文件.  
+
+  echo "Swap file created and activated."  
+  exit $SUCCESS   
+```
+
+
+>运行效果我们可以看到:
+
+```shell
+  long@Raring:/tmp$ vim testswap.sh  
+  long@Raring:/tmp$ chmod +x testswap.sh             
+  long@Raring:/tmp$ sudo ./testswap.sh             
+  [sudo] password for long:    
+  long@Raring:/tmp$ ./testswap.sh             
+
+  You must be root to run this script.  
+
+  long@Raring:/tmp$ sudo ./testswap.sh             
+  [sudo] password for long:       
+  Creating swap file of size 40 blocks (KB).  
+  记录了40+0 的读入  
+  记录了40+0 的写出  
+  40960字节(41 kB)已复制，0.000904021 秒，45.3 MB/秒  
+  正在设置交换空间版本 1，大小 = 36 KiB  
+  无标签， UUID=3e59eddf-098f-454d-9507-aba55f434a8c  
+  Swap file created and activated.   
+>>>>>>> e9a91d381fafe7792015210182167b109754676e
 ```
 - 参考文章  
  [Linux 下的两个特殊的文件 -- /dev/null 和 /dev/zero 简介及对比](http://blog.csdn.net/pi9nc/article/details/18257593)
