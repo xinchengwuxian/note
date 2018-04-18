@@ -2,8 +2,8 @@
 #### 依赖包分析  
 + SDK中的一些方法：  
   1. TextUtils.isEmpty()
-  2. TextWatcher
->TextWatcher是一个文本变化监听接口，定义了三个接口，分别是beforeTextChanged,onTextChanged,afterTextCahnged.TextWatcher通常与TextView结合使用，以便在文本变化的不同时机做响应的处理。TextWatcher中三个回调接口都是使用了InputFilter过滤器过滤之后的文字字符作为新的字符对象。
+  2. TextWatcher  
+      TextWatcher是一个文本变化监听接口，定义了三个接口，分别是beforeTextChanged,onTextChanged,afterTextCahnged.TextWatcher通常与TextView结合使用，以便在文本变化的不同时机做响应的处理。TextWatcher中三个回调接口都是使用了InputFilter过滤器过滤之后的文字字符作为新的字符对象。
 
 
 + com.jaeger.statusbaruitl:library:1.3.5  
