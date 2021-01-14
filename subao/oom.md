@@ -1,6 +1,7 @@
 ### jvm 命令参数
 
--  1066  sudp jinfo PretenureSizeThreshold 19446
+```shell
+   1066  sudp jinfo PretenureSizeThreshold 19446
    1067  sudo jinfo PretenureSizeThreshold 19446
    1068  sudo jinfo -flag PretenureSizeThreshold 19446
    1077  sudo jinfo -flag NewRatio 19446
@@ -14,8 +15,6 @@
    1198  sudo jinfo -flag CMSInitiatingOccupancyFraction 19446
    1199  sudo jinfo -flag CMSTriggerRatio 19446
 
-
-
 sudo jcmd 31458 VM.native_memory baseline
 
 sudo jcmd 31458 VM.native_memory summary.diff scale=MB
@@ -28,16 +27,15 @@ root@962519461d53:~# jcmd 860 GC.class_stats
 860:
 GC.class_stats command requires -XX:+UnlockDiagnosticVMOptions
 
-```
 --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED
 ```
 
- 1003  sudo jstat -gc 19446 2s
+  1003  sudo jstat -gc 19446 2s
 
   989  sudo jmap -dump:file=/tmp/onos_19446_2.hprof 19446
   993  sudo jmap -histo 19446 | head -n 20
 
-![image-20201221171855878](/home/hwpeng/Documents/note/subao/picture/image-20201221171855878.png)
+![image-20201221171855878](./picture/image-20201221171855878.png)
 
 
 
