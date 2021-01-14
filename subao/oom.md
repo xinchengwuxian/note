@@ -37,6 +37,8 @@ GC.class_stats command requires -XX:+UnlockDiagnosticVMOptions
   989  sudo jmap -dump:file=/tmp/onos_19446_2.hprof 19446
   993  sudo jmap -histo 19446 | head -n 20
 
+![image-20201221171855878](/home/hwpeng/Documents/note/subao/picture/image-20201221171855878.png)
+
 
 
 https://toutiao.io/posts/yaekab/preview
