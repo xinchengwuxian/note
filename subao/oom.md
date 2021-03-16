@@ -37,6 +37,16 @@ GC.class_stats command requires -XX:+UnlockDiagnosticVMOptions
 
 ![image-20201221171855878](./picture/image-20201221171855878.png)
 
+cpu 高
+
+内存溢出 元数据
+
+内存溢出atomix
+
+性能调优 新生代
+
+
+
 
 
 https://toutiao.io/posts/yaekab/preview
