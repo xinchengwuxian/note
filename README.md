@@ -1,2 +1,1 @@
-# note
-Just note
+- 工作日志
